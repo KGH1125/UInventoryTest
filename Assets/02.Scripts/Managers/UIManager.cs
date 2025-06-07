@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    //싱글톤
     public static UIManager Instance { get; private set; }
 
     private void Awake()
@@ -11,7 +10,8 @@ public class UIManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            
+            uIMainMenu.OpenMainMenu();
+
         }
         else if (Instance != this)
         {
@@ -19,11 +19,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    UIMainMenu uIMainMenu;
-    [SerializeField]
-    UIStatus uIStatus;
-    [SerializeField]
-    UIInventory uIInventory;
+    [SerializeField] private UIMainMenu uIMainMenu;
+    [SerializeField] private UIStatus uIStatus;
+    [SerializeField] private UIInventory uIInventory;
 
+    public UIMainMenu UIMainMenu => uIMainMenu;
+    public UIStatus UIStatus => uIStatus;
+    public UIInventory UIInventory => uIInventory;
+
+   
 }
