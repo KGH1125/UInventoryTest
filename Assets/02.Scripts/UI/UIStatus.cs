@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -12,17 +10,20 @@ public class UIStatus : MonoBehaviour
 
     private Character player;
 
-    private void Start()
+    private void Awake()
     {
         player = GameManager.instance.Player;
+    }
+    private void Start()
+    {
         UpdateUIStatus();
     }
 
     public void UpdateUIStatus()
     {
         AttackData.text = $"{player.Attack}";
-        DefenseData.text= $"{player.Defense}";
-        HealthData.text= $"{player.Health}";
-        CriticalData.text= $"{player.Critical}";
+        DefenseData.text = $"{player.Defense}";
+        HealthData.text = $"{player.Health}";
+        CriticalData.text = $"{player.Critical}";
     }
 }

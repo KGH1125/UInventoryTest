@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum STAT
@@ -15,24 +16,33 @@ public class Character
     public int Health { get; private set; }
     public int Critical { get; private set; }
 
-    //itemData[] items
+    public List<Item> Inventory { get; private set; }
     public string PlayerName { get; private set; }
     public int PlayerLevel { get; private set; }
     public int CurrentExp { get; private set; }
     public int MaxExp { get; private set; }
     public int Gold { get; private set; }
 
-    public  Character(string name)
+    public Character(string name)
     {
         PlayerName = name;
-        PlayerLevel = 1;
-        CurrentExp = 0;
-        MaxExp = 10;
-        Gold = 0;
+        SetData();
+    }
+
+    private void SetData()
+    {
+        //stst정보
         Attack = 1;
         Defense = 0;
         Health = 10;
         Critical = 5;
+
+        //기본정보
+        PlayerLevel = 1;
+        CurrentExp = 0;
+        MaxExp = 10;
+        Gold = 0;
+        Inventory = new List<Item>();
     }
 
     //플레이어 스텟 더하기
@@ -86,5 +96,31 @@ public class Character
             return true;
         }
         return false;
+    }
+
+    //인벤토리에 아이템 추가
+    public void AddItem(Item item)
+    {
+        Inventory.Add(item);
+    }
+
+    //아이템 장착
+    public void Equip(Item item)
+    {
+        item.isEquipped = true;
+        AddPlayerStat(STAT.Attack, item.itemAttack);
+        AddPlayerStat(STAT.Defense, item.itemDefense);
+        AddPlayerStat(STAT.Health, item.itemHealth);
+        AddPlayerStat(STAT.Critical, item.itemCritical);
+    }
+
+    //아이템 해제
+    public void UnEquip(Item item)
+    {
+        item.isEquipped = false;
+        SubtractPlayerStat(STAT.Attack, item.itemAttack);
+        SubtractPlayerStat(STAT.Defense, item.itemDefense);
+        SubtractPlayerStat(STAT.Health, item.itemHealth);
+        SubtractPlayerStat(STAT.Critical, item.itemCritical);
     }
 }

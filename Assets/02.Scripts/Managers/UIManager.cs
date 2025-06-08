@@ -10,13 +10,17 @@ public class UIManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            uIMainMenu.OpenMainMenu();
+
 
         }
         else if (Instance != this)
         {
             Destroy(gameObject);
         }
+    }
+    private void Start()
+    {
+        uIMainMenu.OpenMainMenu();
     }
 
     [SerializeField] private UIMainMenu uIMainMenu;

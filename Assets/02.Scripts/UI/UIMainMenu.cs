@@ -15,13 +15,21 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerGold;
 
     private Character player;
+    private UIStatus uIStatus;
+    private UIInventory uIInventory;
+
+    private void Awake()
+    {
+        player = GameManager.instance.Player;
+        uIStatus = UIManager.Instance.UIStatus;
+        uIInventory = UIManager.Instance.UIInventory;
+    }
     private void Start()
     {
         UIStatusButton.GetComponent<Button>().onClick.AddListener(OpenStatus);
         UIInventoryButton.GetComponent<Button>().onClick.AddListener(OpenInventory);
         BackButton.GetComponent<Button>().onClick.AddListener(OpenMainMenu);
 
-        player = GameManager.instance.Player;
         SetMainUI();
     }
     //UI Player data 세팅
@@ -34,7 +42,7 @@ public class UIMainMenu : MonoBehaviour
         playerGold.text = $"{player.Gold}";
         playerLevelBar.fillAmount = player.CurrentExp / player.MaxExp;
     }
-    //메인으로 버튼
+    //메인으로(뒤로가기) 버튼
     public void OpenMainMenu()
     {
         ShowPanel(null);
@@ -44,23 +52,23 @@ public class UIMainMenu : MonoBehaviour
     //캐릭터 스탯창 버튼
     public void OpenStatus()
     {
-        ShowPanel(UIManager.Instance.UIStatus.gameObject);
+        ShowPanel(uIStatus.gameObject);
+        uIStatus.UpdateUIStatus();
         SetMainButtonsVisible(false);
     }
 
     //인벤토리 버튼
     public void OpenInventory()
     {
-        ShowPanel(UIManager.Instance.UIInventory.gameObject);
+        ShowPanel(uIInventory.gameObject);
         SetMainButtonsVisible(false);
     }
 
     //해당 창 띄우기
     private void ShowPanel(GameObject panelToShow)
     {
-        UIManager.Instance.UIStatus.gameObject.SetActive(false);
-        UIManager.Instance.UIInventory.gameObject.SetActive(false);
-
+        uIStatus.gameObject.SetActive(false);
+        uIInventory.gameObject.SetActive(false);
         if (panelToShow != null)
             panelToShow.SetActive(true);
     }
