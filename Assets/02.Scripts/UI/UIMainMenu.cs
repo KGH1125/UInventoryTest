@@ -7,6 +7,7 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private GameObject UIStatusButton;
     [SerializeField] private GameObject UIInventoryButton;
     [SerializeField] private GameObject BackButton;
+
     [SerializeField] private TextMeshProUGUI playerName;
     [SerializeField] private TextMeshProUGUI playerLevel;
     [SerializeField] private TextMeshProUGUI playerCurExp;
@@ -32,6 +33,7 @@ public class UIMainMenu : MonoBehaviour
 
         SetMainUI();
     }
+
     //UI Player data 세팅
     private void SetMainUI()
     {
@@ -42,6 +44,7 @@ public class UIMainMenu : MonoBehaviour
         playerGold.text = $"{player.Gold}";
         playerLevelBar.fillAmount = player.CurrentExp / player.MaxExp;
     }
+
     //메인으로(뒤로가기) 버튼
     public void OpenMainMenu()
     {
