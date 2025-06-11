@@ -7,6 +7,7 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private GameObject UIStatusButton;
     [SerializeField] private GameObject UIInventoryButton;
     [SerializeField] private GameObject BackButton;
+    [SerializeField] private GameObject ExpButton;
 
     [SerializeField] private TextMeshProUGUI playerName;
     [SerializeField] private TextMeshProUGUI playerLevel;
@@ -30,6 +31,7 @@ public class UIMainMenu : MonoBehaviour
         UIStatusButton.GetComponent<Button>().onClick.AddListener(OpenStatus);
         UIInventoryButton.GetComponent<Button>().onClick.AddListener(OpenInventory);
         BackButton.GetComponent<Button>().onClick.AddListener(OpenMainMenu);
+        ExpButton.GetComponent<Button>().onClick.AddListener(PlusExp);
 
         SetMainUI();
     }
@@ -42,7 +44,7 @@ public class UIMainMenu : MonoBehaviour
         playerCurExp.text = $"{player.CurrentExp}";
         playerMaxExp.text = $"{player.MaxExp}";
         playerGold.text = $"{player.Gold}";
-        playerLevelBar.fillAmount = player.CurrentExp / player.MaxExp;
+        playerLevelBar.fillAmount = (float) player.CurrentExp / player.MaxExp;
     }
 
     //메인으로(뒤로가기) 버튼
@@ -90,5 +92,15 @@ public class UIMainMenu : MonoBehaviour
         group.alpha = visible ? 1f : 0f;
         group.interactable = visible;
         group.blocksRaycasts = visible;
+    }
+
+    //테스트용 경험치 버튼
+    public void PlusExp()
+    {
+        player.AddPlayerExp(1);
+        playerLevel.text = $"{player.PlayerLevel}";
+        playerCurExp.text = $"{player.CurrentExp}";
+        playerMaxExp.text = $"{player.MaxExp}";
+        playerLevelBar.fillAmount = (float)player.CurrentExp / player.MaxExp;
     }
 }

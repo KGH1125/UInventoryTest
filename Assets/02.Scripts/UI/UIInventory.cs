@@ -33,7 +33,7 @@ public class UIInventory : MonoBehaviour
     {
         GameObject newSlot = Instantiate(slotPrefab, content);
         UISlot uiSlot = newSlot.GetComponent<UISlot>();
-
+        
         if (item != null)
         {
             uiSlot.Set(item);

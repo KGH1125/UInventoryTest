@@ -31,7 +31,7 @@ public class Character
 
     private void SetData()
     {
-        //stst정보
+        //stat정보
         Attack = 1;
         Defense = 0;
         Health = 10;
@@ -39,7 +39,7 @@ public class Character
 
         //기본정보
         PlayerLevel = 1;
-        CurrentExp = 0;
+        CurrentExp = 1;
         MaxExp = 10;
         Gold = 0;
         Inventory = new List<Item>();
@@ -79,7 +79,7 @@ public class Character
         if (CurrentExp >= MaxExp)
         {
             CurrentExp -= MaxExp;
-            MaxExp += 100;
+            MaxExp += 10;
             PlayerLevel++;
         }
     }
