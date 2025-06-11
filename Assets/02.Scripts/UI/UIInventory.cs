@@ -13,12 +13,16 @@ public class UIInventory : MonoBehaviour
     private void Start()
     {
         List<Item> inventory = GameManager.instance.Player.Inventory;
-        inventoryCount.text = $"{inventory.Count}";
-        inventoryMax.text = $"{maxSlots}";
 
         foreach (Item item in inventory)
         {
             MakeSlot(item);
+        }
+
+        if (maxSlots < inventory.Count)
+        {
+            maxSlots = inventory.Count;
+            Debug.Log("MaxSlot 개수가 현재 inventory에 있는 아이템 개수보다 적습니다. MaxSlot개수를 inventory에있는 아이템 수로 변경합니다");
         }
 
         int emptySlotsCount = maxSlots - inventory.Count;
@@ -26,6 +30,9 @@ public class UIInventory : MonoBehaviour
         {
             MakeSlot();
         }
+
+        inventoryCount.text = $"{inventory.Count}";
+        inventoryMax.text = $"{maxSlots}";
     }
 
     //새 슬롯 만들기

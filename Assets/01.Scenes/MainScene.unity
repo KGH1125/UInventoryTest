@@ -1436,7 +1436,7 @@ MonoBehaviour:
   inventoryMax: {fileID: 2036088868}
   content: {fileID: 385523444}
   slotPrefab: {fileID: 2360908176979990339, guid: 9a025a15ffbf0a544bf7d72fdce33972, type: 3}
-  maxSlots: 120
+  maxSlots: 12
 --- !u!1001 &438745025
 PrefabInstance:
   m_ObjectHideFlags: 0
